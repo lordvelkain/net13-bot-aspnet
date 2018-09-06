@@ -27,18 +27,40 @@ namespace SimpleBot
 
             col.InsertOne(doc);
 
-            var colFind = db.GetCollection<BsonDocument>("tabela1");
+            //var colFind = db.GetCollection<BsonDocument>("tabela1");
 
-            
+            col = null;
 
-
-
+            db = null;
 
             return $"{message.User} disse '{message.Text}'";
         }
 
         public static UserProfile GetProfile(string id)
         {
+            var client = new MongoClient();
+            var db = client.GetDatabase("Mongo");
+            var col = db.GetCollection<BsonDocument>("tabela1");
+
+            var filtro = Builders<BsonDocument>.Filter.Eq("id", id);
+            //var filtro = Builders<BsonDocument>.Filter.Gt("id", 1);
+            var res = col.Find(filtro).ToList();
+            
+            UserProfile p = new UserProfile();
+
+            foreach (var item in res)
+            {
+                //p.Id = item.
+                //p.Visitas = "";
+
+            }
+
+
+
+            
+
+
+
             return null;
         }
 

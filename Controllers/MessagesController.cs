@@ -21,6 +21,7 @@ namespace SimpleBot
             if ( activity != null && activity.Type == ActivityTypes.Message)
             {
                 await HandleActivityAsync(activity);
+
             }
 
             // HTTP 202
